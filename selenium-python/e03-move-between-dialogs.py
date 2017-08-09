@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 from time import sleep
 
 
-class TestPythonOrgSearch(unittest.TestCase):
+class TestDialog(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.get("http://127.0.0.1:8888/dialog-test.html")
