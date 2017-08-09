@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selenium Dialog Test Page</title>
+</head>
+<body>
+<button id="show-alert">弹出警告</button>
+<button id="show-prompt">弹出提示</button>
+<form>
+    <p>
+        <input type="text">
+    </p>
+    <p>
+        <input type="file">
+    </p>
+</form>
+<p id="output"></p>
+
+<script>
+    document.getElementById('show-alert').addEventListener('click', function () {
+        alert('this is an alert!');
+    })
+
+    document.getElementById('show-prompt').addEventListener('click', function () {
+        var userin = prompt('Selenium is great!');
+        if (userin === null) {
+            document.getElementById('output').textContent = "Operation aborted.";
+        }
+        else if (userin === '') {
+            document.getElementById('output').textContent = "Silence...";
+        }
+        else {
+            document.getElementById('output').textContent = userin;
+        }
+    })
+</script>
+</body>
+</html>
