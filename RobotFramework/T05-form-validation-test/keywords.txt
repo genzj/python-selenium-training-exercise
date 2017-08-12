@@ -11,9 +11,12 @@ Fill Form
 
 Should Message Be
     [Arguments]    ${name msg}    ${email msg}    ${comment msg}
-    s2l.Element Text Should Be    id=cname-error    ${name msg}
-    s2l.Element Text Should Be    id=cemail-error    ${email msg}
-    s2l.Element Text Should Be    id=ccomment-error    ${comment msg}
+    Run Keyword If    len('${name msg}') > 0    s2l.Element Text Should Be    id=cname-error    ${name msg}
+    ...    ELSE    s2l.Element Should Not Be Visible    id=cname-error
+    Run Keyword If    len('${email msg}') > 0    s2l.Element Text Should Be    id=cemail-error    ${email msg}
+    ...    ELSE    s2l.Element Should Not Be Visible    id=cemail-error
+    Run Keyword If    len('${comment msg}') > 0    s2l.Element Text Should Be    id=ccomment-error    ${comment msg}
+    ...    ELSE    s2l.Element Should Not Be Visible    id=ccomment-error
 
 Test Form Validation
     [Arguments]    ${name}    ${name msg}    ${email}    ${email msg}    ${comment}    ${comment msg}
