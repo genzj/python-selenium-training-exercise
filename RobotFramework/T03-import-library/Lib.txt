@@ -1,0 +1,9 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Test Cases ***
+first selenium test
+    Selenium2Library.Open Browser    http://www.baidu.com
+    ${title}=    Selenium2Library.Get Title
+    Should Contain    ${title}    百度一下
+    [Teardown]    Selenium2Library.Close All Browsers

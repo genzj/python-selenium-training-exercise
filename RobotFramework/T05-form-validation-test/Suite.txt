@@ -1,0 +1,14 @@
+*** Settings ***
+Resource          ../R01-lib-resource.robot
+Resource          keywords.txt
+
+*** Test Cases ***
+fill form
+    [Setup]    s2l.Open Browser    https://jqueryvalidation.org/files/demo/
+    Fill Form    username    email@email.com    abcde
+    s2l.Capture Page Screenshot
+    [Teardown]    s2l.Close All Browsers
+
+form validation
+    [Template]    Test Form Validation
+    s1    \    a    \    s2

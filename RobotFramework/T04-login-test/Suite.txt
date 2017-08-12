@@ -1,0 +1,31 @@
+*** Settings ***
+Library           Selenium2Library    WITH NAME    s2l
+
+*** Test Cases ***
+normal login
+    [Setup]    s2l.Open Browser    http://the-internet.herokuapp.com/login
+    s2l.Input Text    name=username    tomsmith
+    s2l.Input Password    name=password    SuperSecretPassword!
+    s2l.Click Button    tag=button
+    s2l.Element Should Contain    css=.example h2    Secure Area
+    [Teardown]    s2l.Close All Browsers
+
+abnormal login - invalid password
+    [Setup]    s2l.Open Browser    http://the-internet.herokuapp.com/login
+    s2l.Input Text    name=username    tomsmith
+    s2l.Input Password    name=password    user123
+    s2l.Click Button    tag=button
+    s2l.Element Should Contain    css=.example h2    Login Page
+    s2l.Element Should Be Visible    css=.flash.error
+    s2l.Element Should Contain    css=.flash.error    Your password is invalid!
+    [Teardown]    s2l.Close All Browsers
+
+abnormal login - invalid username
+    [Setup]    s2l.Open Browser    http://the-internet.herokuapp.com/login
+    s2l.Input Text    name=username    user123
+    s2l.Input Password    name=password    user123
+    s2l.Click Button    tag=button
+    s2l.Element Should Contain    css=.example h2    Login Page
+    s2l.Element Should Be Visible    css=.flash.error
+    s2l.Element Should Contain    css=.flash.error    Your username is invalid!
+    [Teardown]    s2l.Close All Browsers

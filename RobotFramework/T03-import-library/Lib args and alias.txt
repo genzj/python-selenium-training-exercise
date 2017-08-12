@@ -1,0 +1,9 @@
+*** Settings ***
+Library           Selenium2Library    timeout=5.0    implicit_wait=1.0    WITH NAME    s2l
+
+*** Test Cases ***
+first selenium test
+    s2l.Open Browser    http://www.baidu.com
+    ${title}=    s2l.Get Title
+    Should Contain    ${title}    百度一下
+    [Teardown]    s2l.Close All Browsers

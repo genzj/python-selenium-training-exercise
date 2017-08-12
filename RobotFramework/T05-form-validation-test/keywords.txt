@@ -1,0 +1,23 @@
+*** Settings ***
+Resource          ../R01-lib-resource.robot
+
+*** Keywords ***
+Fill Form
+    [Arguments]    ${name}    ${email}    ${comment}
+    s2l.Input Text    id=cname    ${name}
+    s2l.Input Text    id=cemail    ${email}
+    s2l.Input Text    id=ccomment    ${comment}
+    s2l.Click Button    xpath=//input[@class="submit"][1]
+
+Should Message Be
+    [Arguments]    ${name msg}    ${email msg}    ${comment msg}
+    s2l.Element Text Should Be    id=cname-error    ${name msg}
+    s2l.Element Text Should Be    id=cemail-error    ${email msg}
+    s2l.Element Text Should Be    id=ccomment-error    ${comment msg}
+
+Test Form Validation
+    [Arguments]    ${name}    ${name msg}    ${email}    ${email msg}    ${comment}    ${comment msg}
+    s2l.Open Browser    https://jqueryvalidation.org/files/demo/
+    Fill Form    ${name}    ${email}    ${comment}
+    Should Message Be    ${name msg}    ${email msg}    ${comment msg}
+    [Teardown]    s2l.Close All Browsers
