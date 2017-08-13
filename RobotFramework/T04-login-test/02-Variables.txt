@@ -1,12 +1,17 @@
 *** Settings ***
 Resource          ../R01-lib-resource.robot
 
+*** Variables ***
+${username}       user123
+${password}       pass123
+${expected error msg}    Your username is invalid!
+
 *** Test Cases ***
 abnormal login - invalid anything
     [Setup]    s2l.Open Browser    http://the-internet.herokuapp.com/login
     ${username}=    Set Variable    user123
     ${password}=    Set Variable    pass123
-    ${expected error msg}    Set Variable    Your username is invalid!
+    ${expected error msg}=    Set Variable    Your username is invalid!
     s2l.Input Text    name=username    ${username}
     s2l.Input Password    name=password    ${password}
     s2l.Click Button    tag=button
@@ -15,19 +20,8 @@ abnormal login - invalid anything
     s2l.Element Should Contain    css=.flash.error    ${expected error msg}
     [Teardown]    s2l.Close All Browsers
 
-abnormal login - keyword
-    Abnormal Login Test    user123    pass123    Your username is invalid!
-    Abnormal Login Test    tomsmith    pass123    Your password is invalid!
-
-abnormal login - data
-    [Template]    Abnormal Login Test
-    user123    pass123    Your username is invalid!
-    tomsmith    pass123    Your password is invalid!
-
-*** Keywords ***
-Abnormal Login Test
-    [Arguments]    ${username}    ${password}    ${expected error msg}
-    s2l.Open Browser    http://the-internet.herokuapp.com/login
+abnormal login - invalid variable
+    [Setup]    s2l.Open Browser    http://the-internet.herokuapp.com/login
     s2l.Input Text    name=username    ${username}
     s2l.Input Password    name=password    ${password}
     s2l.Click Button    tag=button
