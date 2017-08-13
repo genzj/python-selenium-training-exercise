@@ -11,5 +11,5 @@ fill form
 
 form validation
     [Template]    Test Form Validation
-    s12    \    s12@email.com    \    abcd    \
-    s    Please enter at least 2 characters.    s12@email.com    \    abcd    \
+    s12    \    s12@email.com    \    abcd    ${EMPTY}
+    s    Please enter at least 2 characters.    s12@email.com    \    abcd    ${EMPTY}
