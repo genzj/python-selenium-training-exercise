@@ -1,0 +1,138 @@
+<html class=""><head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style class="cp-pen-styles">
+      body {
+        margin: 0 auto;
+        text-align: center;
+        font-family: sans-serif;
+      }
+
+      .result, .times {
+        font-family: monospace;
+      }
+
+      .button {
+        margin: 0 auto;
+        width: 90%;
+        height: 80vh;
+        border: 1px solid green;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        text-transform: uppercase;
+      }
+
+      .armed {
+        background-color: green;
+      }
+
+      .invisible {
+        visibility: hidden;
+      }
+    </style>
+
+
+    <span class="result">
+      _
+    </span>
+    <div class="button">
+      <span class="button-text">(placeholder)</span>
+    </div>
+    <span class="times">
+      _
+    </span>
+    <button class="reset-button">reset</button>
+
+    <script>
+      'use strict';
+
+      var button = document.querySelector('.button'),
+      buttonText = document.querySelector('.button-text'),
+      resultText = document.querySelector('.result'),
+      timesText = document.querySelector('.times'),
+      resetButton = document.querySelector('.reset-button');
+
+      var startText = 'Press to test reaction',
+      testingText = 'Press when green',
+      resetText = 'Press to reset test';
+
+      var actions = ['mousedown', 'touchstart'];
+      var startTime, offset, endTime;
+      var times = [];
+
+      buttonText.textContent = startText;
+      multiAddListener(button, actions, beginTest);
+
+      resetButton.addEventListener('click', function () {
+        times = [];
+        resultText.textContent = '_';
+        timesText.textContent = '_';
+      });
+
+      function multiAddListener(target, events, action) {
+        events.forEach(function (ev) {
+          return target.addEventListener(ev, action);
+        });
+      }
+
+      function multiRemoveListener(target, events, action) {
+        events.forEach(function (ev) {
+          return target.removeEventListener(ev, action);
+        });
+      }
+
+      function randTime() {
+        // between 2.345 and 9 seconds.
+        return Math.random() * 7000 + 2345;
+      }
+
+      function beginTest(e) {
+        resultText.classList.toggle('invisible');
+        buttonText.textContent = testingText;
+        multiRemoveListener(button, actions, beginTest);
+
+        offset = randTime();
+        setTimeout(armButton, offset);
+        startTime = new Date();
+      }
+
+      function armButton() {
+        multiAddListener(button, actions, testReaction);
+        button.classList.toggle('armed');
+      }
+
+      function disarmButton() {
+        multiRemoveListener(button, actions, testReaction);
+        button.classList.toggle('armed');
+      }
+
+      function testReaction(e) {
+        endTime = new Date();
+        disarmButton();
+        var time = Number(((endTime - startTime - offset) / 1000).toFixed(3));
+        var timeString = time + ' seconds';
+        times.push(time);
+        resultText.textContent = time;
+        resultText.classList.toggle('invisible');
+        timesText.textContent = times.join(', ') + ' = avg(' + (times.reduce(function (prev, cur) {
+          return prev + cur;
+        }, 0) / times.length).toFixed(4) + ')';
+        // debounce
+        setTimeout(function () {
+          multiAddListener(button, actions, beginTest);
+        }, 400);
+        buttonText.textContent = startText;
+      }
+      //# sourceURL=pen.js
+    </script>
+  </body>
+</html>
