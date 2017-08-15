@@ -20,7 +20,7 @@ Should Message Be
 
 Test Form Validation
     [Arguments]    ${name}    ${name msg}    ${email}    ${email msg}    ${comment}    ${comment msg}
-    s2l.Open Browser    https://jqueryvalidation.org/files/demo/
+    s2l.Open Browser    http://127.0.0.1:8000/
     Fill Form    ${name}    ${email}    ${comment}
     Should Message Be    ${name msg}    ${email msg}    ${comment msg}
     [Teardown]    s2l.Close All Browsers

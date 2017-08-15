@@ -4,7 +4,7 @@ Resource          keywords.txt
 
 *** Test Cases ***
 fill form
-    [Setup]    s2l.Open Browser    https://jqueryvalidation.org/files/demo/
+    [Setup]    s2l.Open Browser    http://127.0.0.1:8000/
     Fill Form    username    email@email.com    abcde
     s2l.Capture Page Screenshot
     [Teardown]    s2l.Close All Browsers
