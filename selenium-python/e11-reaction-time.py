@@ -27,6 +27,8 @@ class ReactionTime(unittest.TestCase):
             )
             elem.click()
             sleep(1)
+        result = driver.find_element(By.CLASS_NAME, 'times')
+        print(result.text)
 
 if __name__ == "__main__":
     unittest.main()
