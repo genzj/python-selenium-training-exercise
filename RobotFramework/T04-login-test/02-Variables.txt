@@ -15,6 +15,7 @@ abnormal login - invalid anything
     s2l.Input Text    name=username    ${username}
     s2l.Input Password    name=password    ${password}
     s2l.Click Button    tag=button
+    s2l.Wait Until Element Is Visible    css=.flash.error    timeout=1min
     s2l.Element Should Contain    css=.example h2    Login Page
     s2l.Element Should Be Visible    css=.flash.error
     s2l.Element Should Contain    css=.flash.error    ${expected error msg}
@@ -25,6 +26,7 @@ abnormal login - invalid variable
     s2l.Input Text    name=username    ${username}
     s2l.Input Password    name=password    ${password}
     s2l.Click Button    tag=button
+    s2l.Wait Until Element Is Visible    css=.flash.error    timeout=1min
     s2l.Element Should Contain    css=.example h2    Login Page
     s2l.Element Should Be Visible    css=.flash.error
     s2l.Element Should Contain    css=.flash.error    ${expected error msg}
