@@ -1,0 +1,21 @@
+*** Settings ***
+Library           OperatingSystem    WITH NAME    os
+
+*** Test Cases ***
+01-plain-echo
+    ${result}=    os.Run    echo test string
+    ${x}=    Evaluate    ord($result[-1])
+    Should Be Equal    ${result}    test string \
+
+02-echo-help
+    ${output} =    os.Run    echo/?
+    Should Contain    ${output}    Displays messages, or turns command-echoing on or off.
+
+03-echo-escape
+    ${output} =    os.Run    echo:/?
+    Should Be Equal    ${output}    /? \
+
+04-echo-return-value
+    ${rc}    ${output} =    Run And Return Rc And Output    echo test string
+    Should Be Equal    ${rc}    ${0}
+    Should Be Equal    ${output}    test string \
