@@ -121,3 +121,6 @@ i18n/*.qm
 
 .idea/
 x.png
+
+!/selenium-python/test-pages/drawing-board/lib/
+
