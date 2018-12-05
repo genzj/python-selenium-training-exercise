@@ -13,7 +13,7 @@ class TestDragDrop(unittest.TestCase):
         width = 200
         driver = self.driver
         # self.driver.get("http://blog.poetries.top/drawing-board/")
-        self.driver.get("http://127.0.0.1:8000/")
+        self.driver.get("http://127.0.0.1:8888/")
         self.assertIn(u"drawing-board", driver.title)
         canvas = driver.find_element_by_id('canvas')
         actions = ActionChains(driver)

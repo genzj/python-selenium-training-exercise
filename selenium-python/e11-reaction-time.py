@@ -16,7 +16,7 @@ class ReactionTime(unittest.TestCase):
 
     def test_reaction_time(self):
         driver = self.driver
-        self.driver.get("http://127.0.0.1:8000/")
+        self.driver.get("http://127.0.0.1:8888/")
         for i in range(5):
             elem = driver.find_element(By.CLASS_NAME, 'button')
             elem.click()
