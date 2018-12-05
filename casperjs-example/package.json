@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "casperjs test test-sogou.js"
+  },
+  "dependencies": {
+    "casperjs": "^1.1.4"
+  }
+}
