@@ -1,0 +1,38 @@
+*** Settings ***
+Library           SSHLibrary    WITH NAME    ssh
+
+*** Variables ***
+${host}           localhost
+${username}       atc
+${password}       1234
+
+*** Test Cases ***
+pytest
+    [Setup]    Open Connection And Login    ${host}    ${username}    ${password}
+    ${stdout}    ${stderr}    ${rc} =    ssh.Execute Command    cd ~/python-selenium-training-exercise/python-test-frameworks/pytest-example && python2 -m pytest    return_rc=${TRUE}    return_stderr=${TRUE}
+    Log    ${stdout}
+    Log    ${stderr}
+    Should Be Equal    ${rc}    ${1}
+    [Teardown]    ssh.Close All Connections
+
+nose2
+    [Setup]    Open Connection And Login    ${host}    ${username}    ${password}
+    ${stdout}    ${stderr}    ${rc} =    ssh.Execute Command    cd ~/python-selenium-training-exercise/python-test-frameworks/nose2-example && python2 -m nose2    return_rc=${TRUE}    return_stderr=${TRUE}
+    Log    ${stdout}
+    Log    ${stderr}
+    Should Be Equal    ${rc}    ${0}
+    [Teardown]    ssh.Close All Connections
+
+oktest
+    [Setup]    Open Connection And Login    ${host}    ${username}    ${password}
+    ${stdout}    ${stderr}    ${rc} =    ssh.Execute Command    cd ~/python-selenium-training-exercise/python-test-frameworks/oktest-example && python2 -m oktest test_sample.py    return_rc=${TRUE}    return_stderr=${TRUE}
+    Log    ${stdout}
+    Log    ${stderr}
+    Should Be Equal    ${rc}    ${0}
+    [Teardown]    ssh.Close All Connections
+
+*** Keywords ***
+Open Connection And Login
+    [Arguments]    ${host}    ${username}    ${password}
+    ssh.Open Connection    ${host}
+    ssh.Login    ${username}    ${password}
