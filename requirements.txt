@@ -23,7 +23,7 @@ pbr==5.1.1
 pluggy==0.8.0
 py==1.10.0
 pycrypto==2.6.1
-Pygments==2.2.0
+Pygments==2.7.4
 PyGObject==3.30.1
 Pypubsub==4.0.0
 pytest==4.0.1
