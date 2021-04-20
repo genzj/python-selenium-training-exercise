@@ -21,7 +21,7 @@ Oktest==0.15.2
 pathlib2==2.3.3
 pbr==5.1.1
 pluggy==0.8.0
-py==1.7.0
+py==1.10.0
 pycrypto==2.6.1
 Pygments==2.2.0
 PyGObject==3.30.1
