@@ -39,4 +39,4 @@ SecretStorage==2.3.1
 selenium==3.14.1
 six==1.11.0
 typing==3.6.6
-urllib3==1.24
+urllib3==1.26.5
